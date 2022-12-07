@@ -2,8 +2,52 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+
+function renderLicenseBadge(license) {
+  if (license === "no license used"){
+    return " ";
+  } else if (license ==="MIT"){
+    return `[![License: ${license}](https://img.shields.io/badge/license-${license}-blue.svg)`; 
+  } else if (license ==="Apache"){
+    return `[![License: ${license}](https://img.shields.io/badge/license-${license}-blue.svg)`;
+  } else if (license ==="GPL"){
+    return `[![License: ${license}](https://img.shields.io/badge/license-${license}-blue.svg)`;
+  } else if (license ==="BSD"){
+  return `[![License: ${license}](https://img.shields.io/badge/license-${license}-blue.svg)`;
+}
+}
+
+// TODO: Create a function that returns the license link
+// If there is no license, return an empty string
+function renderLicenseLink(license) {
+  if (license === "none"){
+    return " ";
+} else if (license === "MIT"){
+return "(https://opensource.org/licenses/MIT)";
+}else if (license === "Apache"){
+return "(https://opensource.org/licenses/Apache-2.0)";
+}else if (license === "GPL"){
+return "(https://www.gnu.org/licenses/gpl-3.0)";
+}else if (license === "BSD"){
+return "(https://opensource.org/licenses/BSD-3-Clause)";
+}
+}
+
+// TODO: Create a function that returns the license section of README
+// If there is no license, return an empty string
+function renderLicenseSection(license) {
+  if (license !== `None`){
+    return (
+      ` #License 
+      This proejct uses the ${license} license`
+    )
+  }
+  return ``
+}
+
 const generateREADME = ({ Title, Description, Installation, Usage, Contributing, Test, License, username, email }) =>
 `# ${Title}
+${renderLicenseBadge(License)}
 * created by ${username}
 
 # Table of Contents
@@ -99,46 +143,3 @@ inquirer
       err ? console.log(err) : console.log('Thank you for your content. We have successfully created README.md for your application!')
     );
   });
-
-  function renderLicenseBadge(license) {
-    if (license === "no license used"){
-      return " ";
-    } else if (license ==="MIT"){
-      return `[![License: ${license}](https://img.shields.io/badge/license-${license}-blue.svg)`; 
-    } else if (license ==="Apache"){
-      return `[![License: ${license}](https://img.shields.io/badge/license-${license}-blue.svg)`;
-    } else if (license ==="GPL"){
-      return `[![License: ${license}](https://img.shields.io/badge/license-${license}-blue.svg)`;
-    } else if (license ==="BSD"){
-    return `[![License: ${license}](https://img.shields.io/badge/license-${license}-blue.svg)`;
-}
-  }
-  
-  // TODO: Create a function that returns the license link
-  // If there is no license, return an empty string
-  function renderLicenseLink(license) {
-    if (license === "none"){
-      return " ";
-  } else if (license === "MIT"){
-  return "(https://opensource.org/licenses/MIT)";
-  }else if (license === "Apache"){
-  return "(https://opensource.org/licenses/Apache-2.0)";
-  }else if (license === "GPL"){
-  return "(https://www.gnu.org/licenses/gpl-3.0)";
-  }else if (license === "BSD"){
-  return "(https://opensource.org/licenses/BSD-3-Clause)";
-  }
-}
-
-  // TODO: Create a function that returns the license section of README
-  // If there is no license, return an empty string
-  function renderLicenseSection(license) {
-    if (license !== `None`){
-      return (
-        ` #License 
-        This proejct uses the ${license} license`
-      )
-    }
-    return ``
-  }
-
